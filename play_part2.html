@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+		<body onload="do_game()">
+				<script>
+				var guess_input_text;
+				var finished = false;
+				var guesses = 0;
+				var result;
+				var colors = ['green', 'red', 'blue', 'orange', 'yellow','purple'];
+				colors.sort();
+
+				console.log(colors);
+
+				
+				function do_game() {
+				truecolor = colors[Math.floor(Math.random() * colors.length)];
+				res = colors.indexOf(truecolor);
+				console.log(res);
+				while(!finished){
+					guess_input_text = prompt("I am thinking of one of these colors:\n\n"+colors+"\n\n" +
+					"What color am I thinking of?");
+					result1 = colors.indexOf(guess_input_text);
+					console.log(result1);
+					guesses = guesses+1;
+					finished = check_guess();
+				}
+				}
+				
+				function check_guess() {
+					
+					if(result1 === -1)
+					{
+						alert("Sorry,I don't recognize your color"+"\n\nPlease try again");
+						return false;
+					}
+					if(guess_input_text > truecolor){
+						alert("Sorry,your guess is not correct!"+"\n\nHint: your color is alphabetically higher than mine."+"\n\nPlease try again");
+						return false;
+					}
+					if(guess_input_text < truecolor){
+						alert("Sorry,your guess is not correct"+"\n\nHint: your color is alphabetically lower than mine."+"\n\nPlease try again");
+						return false;
+					}
+
+					alert("Congratulations!You have guessed the color!\n\n"+"The right color is "+truecolor+"\n\nIt took you "+guesses+" guesses to finish the game!\n\n"+"You Can see the color in the background.");
+					document.bgColor = truecolor;
+					return true;
+				}
+				</script>
+
+		</body>
+</html>
